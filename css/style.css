@@ -841,15 +841,23 @@ section {
   gap: 12px;
   cursor: pointer;
   text-align: left;
-  transition: background var(--transition);
+  transition: all 0.2s ease;
 }
 
-.t-card-header:hover {
-  background: var(--color-bg-light);
+@media (hover: hover) {
+  .t-card-header:hover {
+    background: #fafafc;
+    border-color: var(--color-primary-lt);
+    box-shadow: 0 4px 12px rgba(30, 52, 96, 0.08);
+    /* 浮き上がるような影 */
+    transform: translateY(-1px);
+  }
 }
 
 .t-card-header[aria-expanded="true"] {
   background: var(--color-primary-pale);
+  border-bottom-color: transparent;
+  /* 展開時に下の線を目立たなくする */
 }
 
 .t-card-left {
@@ -907,6 +915,21 @@ section {
   color: var(--color-text-muted);
   font-size: 0.82em;
   font-family: var(--font-sans);
+  display: inline-block;
+  /* カッコ内で改行されるのを防ぎ、改行するならカッコごと下に落とす */
+}
+
+@media (max-width: 480px) {
+  .t-name {
+    font-size: 0.9rem;
+    /* スマホではメイン名を少し小さくして一行に収まりやすくする */
+  }
+
+  .t-name small {
+    display: block;
+    /* スマホではカッコ部分をスッキリ2行目にする */
+    margin-top: 2px;
+  }
 }
 
 .t-tag {
@@ -931,13 +954,34 @@ section {
 .t-card-chevron {
   width: 20px;
   height: 20px;
-  color: var(--color-text-muted);
+  color: var(--color-primary);
+  /* Chevronの色を強調 */
   transition: transform var(--transition);
   flex-shrink: 0;
+  background: var(--color-bg-light);
+  border-radius: 50%;
+  padding: 2px;
 }
 
 .t-card-header[aria-expanded="true"] .t-card-chevron {
   transform: rotate(180deg);
+  background: var(--color-primary);
+  color: #fff;
+}
+
+/* 新設：詳細を見るテキスト */
+.t-action-text {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-right: 4px;
+}
+
+@media (max-width: 480px) {
+  .t-action-text {
+    font-size: 0.72rem;
+    margin-right: 2px;
+  }
 }
 
 .t-card-body {
@@ -2405,7 +2449,21 @@ section {
   }
 }
 
-/* ---------- レスポンシブ ---------- */
+/* 中間サイズ（1051px〜1200px）での調整 */
+@media (max-width: 1200px) {
+  .nav-container {
+    padding: 0 20px;
+  }
+
+  .nav-links {
+    gap: 14px;
+  }
+
+  .nav-links a {
+    font-size: 0.8rem;
+  }
+}
+
 @media (max-width: 960px) {
   .hero-inner {
     grid-template-columns: 1fr;
@@ -2445,7 +2503,8 @@ section {
   }
 }
 
-@media (max-width: 768px) {
+/* モバイル・タブレット（1050px以下）でハンバーガーメニューに切り替え */
+@media (max-width: 1050px) {
   .nav-links {
     display: none;
     position: fixed;
@@ -2739,7 +2798,7 @@ section {
   margin-top: 2px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1050px) {
   .progress-stages-text {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -2844,7 +2903,7 @@ section {
   margin: 0;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1050px) {
   .follicle-layout {
     grid-template-columns: 1fr;
     gap: 28px;
@@ -2961,7 +3020,7 @@ section {
   white-space: nowrap;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1050px) {
   .clinic-comparison-wrap {
     padding: 24px 16px;
   }
