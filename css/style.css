@@ -2830,8 +2830,9 @@ section {
 }
 
 .follicle-img-wrap {
-  position: sticky;
-  top: 90px;
+  position: relative;
+  /* position: sticky; を削除し、後続セクションとの重なりを解消 */
+  margin-bottom: 24px;
 }
 
 .follicle-img {
@@ -2911,6 +2912,252 @@ section {
 
   .follicle-img-wrap {
     position: static;
+  }
+}
+
+/* ================================================================
+   ヘアサイクル解説セクション（section-haircycle）- 形式洗練版
+   ================================================================ */
+.section-haircycle {
+  padding: var(--section-padding);
+  background-color: #fbfcfe;
+}
+
+.haircycle-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 72px;
+  align-items: flex-start;
+}
+
+/* 比較グラフエリア（形式調整） */
+.hc-graph-area {
+  background: #fff;
+  padding: 48px;
+  border-radius: 12px;
+  box-shadow: 0 4px 25px rgba(28, 45, 82, 0.06);
+  border: 1px solid var(--color-border-light);
+}
+
+.hc-graph-title {
+  font-size: 1.15rem;
+  color: var(--color-primary);
+  margin-bottom: 40px;
+  text-align: center;
+  font-family: var(--font-serif);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.hc-graph-container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-bottom: 32px;
+}
+
+.hc-graph-row {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.hc-row-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-bottom: 1px solid #f0f2f5;
+  padding-bottom: 10px;
+}
+
+.hc-row-type {
+  font-weight: 700;
+  color: var(--color-text-sub);
+  font-size: 0.88rem;
+  letter-spacing: 0.05em;
+}
+
+.hc-row-type--alert {
+  color: var(--color-danger);
+}
+
+.hc-row-years {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--color-primary);
+}
+
+.hc-row-bar-wrap {
+  display: flex;
+  height: 48px;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #f0f2f5;
+  border: 1px solid rgba(0,0,0,0.03);
+}
+
+.hc-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #fff;
+  transition: width 1s ease-out;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.hc-bar--growth {
+  width: 85%;
+  background: linear-gradient(90deg, var(--color-primary), #2a4175);
+}
+
+.hc-bar--growth-short {
+  width: 15%;
+  background: linear-gradient(90deg, var(--color-danger), #e66b6b);
+}
+
+.hc-bar--other {
+  flex-grow: 1;
+  background: #dce1e8;
+  color: var(--color-text-muted);
+  font-size: 0.72rem;
+  text-shadow: none;
+}
+
+.hc-graph-caption {
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+  padding: 12px 16px;
+  background: #f8faff;
+  border-radius: 6px;
+}
+
+/* 論理解説エリア（タイポグラフィ調整） */
+.hc-theory-area {
+  padding-top: 4px;
+}
+
+.hc-theory-content h3 {
+  font-size: 1.6rem;
+  color: var(--color-primary);
+  margin-bottom: 14px;
+  font-family: var(--font-serif);
+  line-height: 1.4;
+}
+
+.hc-theory-intro {
+  color: var(--color-text-sub);
+  margin-bottom: 36px;
+  font-size: 0.92rem;
+  line-height: 1.8;
+}
+
+.hc-step-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.hc-theory-step {
+  display: flex;
+  gap: 20px;
+  padding: 24px;
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid var(--color-border-light);
+  transition: all 0.3s ease;
+}
+
+.hc-theory-step:hover {
+  border-color: var(--color-gold-border);
+  box-shadow: 0 8px 20px rgba(28, 45, 82, 0.05);
+}
+
+.hct-step-num {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 0.75rem;
+  color: var(--color-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  padding-top: 4px;
+}
+
+.hct-step-body strong {
+  display: block;
+  font-size: 1.05rem;
+  color: var(--color-primary);
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.hct-step-body p {
+  font-size: 0.88rem;
+  color: var(--color-text-sub);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* CTAボックス（配色とフォント形式の洗練） */
+.hc-cta-box {
+  margin-top: 48px;
+  padding: 32px;
+  background: linear-gradient(135deg, #fffcf5 0%, #fff9eb 100%);
+  color: var(--color-primary);
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.1);
+  border: 1px solid var(--color-gold-pale);
+  position: relative;
+}
+
+.hc-cta-box::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--color-gold);
+}
+
+.hc-cta-box p {
+  font-size: 0.95rem;
+  line-height: 1.9;
+  margin: 0;
+  font-weight: 500;
+}
+
+.hc-cta-box strong {
+  color: var(--color-primary);
+  background: linear-gradient(transparent 75%, rgba(212, 175, 55, 0.25) 75%);
+}
+
+@media (max-width: 1150px) {
+  .haircycle-grid {
+    grid-template-columns: 1fr;
+    gap: 64px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hc-graph-area {
+    padding: 32px 20px;
+  }
+  
+  .hc-row-years {
+    font-size: 1rem;
+  }
+  
+  .hc-theory-step {
+    padding: 20px;
+    gap: 15px;
+  }
+  
+  .hct-step-num {
+    font-size: 0.65rem;
   }
 }
 
