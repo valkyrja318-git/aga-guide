@@ -2818,7 +2818,7 @@ section {
    毛根比較セクション（section-follicle）
    ================================================================ */
 .section-follicle {
-  padding: var(--section-padding);
+  /* 標準の section padding を継承するため、ここでの定義を削除または正規化 */
   background: var(--color-bg);
 }
 
@@ -2831,12 +2831,13 @@ section {
 
 .follicle-img-wrap {
   position: relative;
-  /* position: sticky; を削除し、後続セクションとの重なりを解消 */
-  margin-bottom: 24px;
+  display: table; /* 画像の実際の幅に追随させ、ラベルのズレを解消 */
+  margin: 0 auto 24px;
 }
 
 .follicle-img {
   width: 100%;
+  max-width: 540px;
   height: auto;
   border-radius: 16px;
   box-shadow: 0 8px 40px rgba(28, 45, 82, 0.14);
@@ -2913,13 +2914,16 @@ section {
   .follicle-img-wrap {
     position: static;
   }
+
+  .follicle-img {
+    max-width: 280px; /* モバイルで主張を抑える */
+  }
 }
 
 /* ================================================================
    ヘアサイクル解説セクション（section-haircycle）- 形式洗練版
    ================================================================ */
 .section-haircycle {
-  padding: var(--section-padding);
   background-color: #fbfcfe;
 }
 
@@ -3046,6 +3050,12 @@ section {
   margin-bottom: 14px;
   font-family: var(--font-serif);
   line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  .hc-theory-content h3 {
+    font-size: 1.3rem; /* モバイルで不自然な改行を防ぐ */
+  }
 }
 
 .hc-theory-intro {
