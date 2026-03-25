@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ALASCE — コンプレックスをチカラに変える情報メディア</title>
+  <meta name="description" content="ALASCEは、AGA・メンズ脱毛・ファッションなど、男性のコンプレックス改善をサポートする情報メディアです。マイナスからプラスへ。あなたの「新たな明日への変化」を後押しします。" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- OGP -->
+  <meta property="og:title" content="ALASCE — コンプレックスをチカラに変える情報メディア" />
+  <meta property="og:description" content="AGA・メンズ脱毛・ファッションなど、男性のコンプレックス改善をサポートする情報メディア。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://alasce.com/" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ===== リセット & ベース ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      /* AGAサイトと共通のカラー基盤 */
+      --navy:       #0c1c3a;
+      --navy-lt:    #1c3564;
+      --navy-dark:  #07111f;
+      --gold:       #c9a030;
+      --gold-lt:    #ddb94a;
+      --gold-pale:  rgba(201,160,48,0.12);
+
+      /* ページ固有（ダーク背景） */
+      --bg:       #0a1220;
+      --bg-card:  #0f1c2e;
+      --bg-section: #0d1829;
+      --text:     #e4e8f0;
+      --muted:    #7a8ba0;
+      --border:   rgba(201,160,48,0.15);
+      --radius:   12px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+
+    /* ===== ナビ ===== */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 0 5%;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(7, 17, 31, 0.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 900;
+      font-size: 1.45rem;
+      letter-spacing: 0.14em;
+      color: var(--gold);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-logo:hover { color: var(--gold-lt); }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 400;
+      transition: color 0.25s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* ===== ヒーロー ===== */
+    .hero {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 5% 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* 背景装飾オーブ */
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,160,48,0.10) 0%, transparent 68%);
+      top: -80px; right: -160px;
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(28,53,100,0.35) 0%, transparent 70%);
+      bottom: -60px; left: -100px;
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.2s ease forwards;
+    }
+
+    .hero-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(3.5rem, 12vw, 7.5rem);
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      line-height: 1;
+      margin-bottom: 1rem;
+      color: #fff;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.4s ease forwards;
+    }
+    /* ALASCEのEのみゴールドに */
+    .hero-title .accent { color: var(--gold); }
+
+    .hero-tagline {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: clamp(0.88rem, 2.4vw, 1.05rem);
+      color: var(--muted);
+      max-width: 480px;
+      margin: 0 auto 0.8rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.6s ease forwards;
+    }
+
+    .hero-concept {
+      display: inline-flex;
+      gap: 0.6rem;
+      align-items: center;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.28);
+      margin-bottom: 2.8rem;
+      letter-spacing: 0.06em;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.75s ease forwards;
+    }
+    .hero-concept span { color: rgba(201,160,48,0.7); }
+
+    .hero-cta-group {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.9s ease forwards;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.9rem;
+      border-radius: 6px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+      cursor: pointer;
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--navy);
+      box-shadow: 0 4px 20px rgba(201,160,48,0.35);
+    }
+    .btn-primary:hover {
+      background: var(--gold-lt);
+      box-shadow: 0 8px 28px rgba(201,160,48,0.45);
+    }
+
+    .btn-ghost {
+      border: 1px solid rgba(201,160,48,0.35);
+      color: var(--muted);
+      background: transparent;
+    }
+    .btn-ghost:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* ===== 区切りライン ===== */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+      margin: 0;
+    }
+
+    /* ===== ブランド名解説バー ===== */
+    .brand-bar {
+      padding: 3rem 5%;
+      background: var(--bg-section);
+    }
+
+    .brand-bar-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      display: flex;
+      gap: 0;
+      justify-content: center;
+      align-items: stretch;
+    }
+
+    .brand-part {
+      flex: 1;
+      text-align: center;
+      padding: 1.5rem 1rem;
+      position: relative;
+    }
+    .brand-part:not(:last-child)::after {
+      content: '+';
+      position: absolute;
+      right: -0.1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(201,160,48,0.2);
+      font-size: 1.3rem;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .brand-part-en {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 1.55rem;
+      color: var(--gold);
+      margin-bottom: 0.3rem;
+      letter-spacing: 0.04em;
+    }
+    .brand-part-jp {
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+
+    /* ===== セクション共通 ===== */
+    section { padding: 80px 5%; }
+
+    .section-label {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(1.5rem, 4vw, 2.2rem);
+      font-weight: 600;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+      color: #fff;
+    }
+
+    .section-desc {
+      color: var(--muted);
+      font-size: 0.92rem;
+      max-width: 540px;
+      margin-bottom: 3rem;
+      line-height: 1.9;
+    }
+
+    /* ===== コンセプト フロー ===== */
+    .concept-flow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-top: 2.5rem;
+    }
+
+    .concept-node {
+      text-align: center;
+    }
+
+    /* SVGアイコン円 */
+    .concept-icon {
+      width: 68px; height: 68px;
+      border-radius: 50%;
+      border: 1px solid;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 0.7rem;
+    }
+    .concept-icon.state-minus {
+      border-color: rgba(180,60,60,0.4);
+      background: rgba(180,60,60,0.08);
+    }
+    .concept-icon.state-info {
+      border-color: rgba(201,160,48,0.4);
+      background: rgba(201,160,48,0.08);
+    }
+    .concept-icon.state-act {
+      border-color: rgba(28,53,100,0.8);
+      background: rgba(28,53,100,0.3);
+    }
+    .concept-icon.state-plus {
+      border-color: rgba(201,160,48,0.6);
+      background: rgba(201,160,48,0.12);
+    }
+
+    .concept-label {
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 0.03em;
+    }
+
+    .concept-arrow {
+      color: rgba(201,160,48,0.4);
+      display: flex;
+      align-items: center;
+    }
+
+    /* ===== カテゴリカード ===== */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(288px, 1fr));
+      gap: 1.2rem;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 14px 40px rgba(0,0,0,0.5); }
+    .card.aga:hover  { border-color: rgba(201,160,48,0.5); }
+    .card.hair:hover { border-color: rgba(28,53,100,0.9); }
+    .card.fashion:hover { border-color: rgba(201,160,48,0.35); }
+
+    /* カード上部ゴールドライン */
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      border-radius: var(--radius) var(--radius) 0 0;
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+    .card.aga::before  { background: linear-gradient(90deg, var(--gold), var(--gold-lt)); }
+    .card.hair::before { background: linear-gradient(90deg, var(--navy-lt), #4a6fa5); }
+    .card.fashion::before { background: linear-gradient(90deg, var(--gold), #e8d080); }
+    .card:hover::before { transform: scaleX(1); }
+
+    .card-badge {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.66rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 0.28rem 0.75rem;
+      border-radius: 4px;
+      display: inline-block;
+      width: fit-content;
+    }
+    .badge-aga     { background: rgba(201,160,48,0.15); color: var(--gold); }
+    .badge-hair    { background: rgba(28,53,100,0.5);   color: #8ab0d8; }
+    .badge-fashion { background: rgba(201,160,48,0.10); color: rgba(201,160,48,0.8); }
+    .badge-soon    { background: rgba(255,255,255,0.06); color: var(--muted); }
+
+    .card-title {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .card-desc {
+      font-size: 0.84rem;
+      color: var(--muted);
+      line-height: 1.75;
+      flex: 1;
+    }
+
+    .card-link {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 0.5rem;
+    }
+    .card.hair .card-link  { color: #8ab0d8; }
+    .card.fashion .card-link { color: rgba(201,160,48,0.7); }
+
+    /* カードSVGアイコン */
+    .card-svg-icon {
+      width: 36px; height: 36px;
+      margin-bottom: 0.25rem;
+      opacity: 0.75;
+    }
+
+    .card.soon {
+      opacity: 0.55;
+      cursor: default;
+    }
+    .card.soon:hover { transform: none; box-shadow: none; }
+    .card.soon::before { display: none; }
+
+    /* ===== ミッション ===== */
+    .mission {
+      background: var(--bg-section);
+      text-align: center;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .mission-quote {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(1.3rem, 3.5vw, 2rem);
+      font-weight: 600;
+      max-width: 660px;
+      margin: 0 auto 1.5rem;
+      line-height: 1.55;
+      color: #fff;
+    }
+    .mission-quote em {
+      font-style: normal;
+      color: var(--gold);
+    }
+
+    .mission-body {
+      color: var(--muted);
+      font-size: 0.88rem;
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.95;
+    }
+
+    /* ===== フッター ===== */
+    footer {
+      padding: 3rem 5%;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 900;
+      font-size: 1.7rem;
+      letter-spacing: 0.12em;
+      color: var(--gold);
+    }
+
+    .footer-separator {
+      width: 36px;
+      height: 1.5px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-lt));
+      border-radius: 2px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.8rem;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+
+    .footer-copy {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.18);
+    }
+
+    /* ===== アニメーション ===== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ===== レスポンシブ ===== */
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .brand-bar-inner { flex-direction: column; gap: 0.5rem; }
+      .brand-part::after { display: none; }
+      .concept-flow { gap: 0.8rem; }
+      .concept-arrow svg { width: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ナビゲーション -->
+  <nav>
+    <a href="/" class="nav-logo">ALASCE</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#categories">カテゴリ</a></li>
+      <li><a href="https://alasce.com/aga-lab/" id="nav-aga">AGA Lab</a></li>
+    </ul>
+  </nav>
+
+  <!-- ヒーロー -->
+  <section class="hero">
+    <p class="hero-eyebrow">Arata · Asu · Change</p>
+    <h1 class="hero-title">ALASC<span class="accent">E</span></h1>
+    <p class="hero-tagline">コンプレックスを突破口に。<br>自分らしい「プラス」へ進むための情報メディア。</p>
+    <p class="hero-concept">
+      <span>新た</span> &nbsp;×&nbsp; <span>明日</span> &nbsp;×&nbsp; <span>Change</span>
+    </p>
+    <div class="hero-cta-group">
+      <a href="#categories" class="btn btn-primary">カテゴリを見る</a>
+      <a href="https://alasce.com/aga-lab/" class="btn btn-ghost">AGA Lab へ</a>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ブランド名解説 -->
+  <div class="brand-bar" id="about">
+    <div class="brand-bar-inner">
+      <div class="brand-part">
+        <div class="brand-part-en">Arata</div>
+        <div class="brand-part-jp">新た — 新しい自分へ</div>
+      </div>
+      <div class="brand-part">
+        <div class="brand-part-en">Asu</div>
+        <div class="brand-part-jp">明日 — 変わる明日へ</div>
+      </div>
+      <div class="brand-part">
+        <div class="brand-part-en">Change</div>
+        <div class="brand-part-jp">変化 — 行動が未来を変える</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- コンセプト -->
+  <section>
+    <p class="section-label reveal">Our Philosophy</p>
+    <h2 class="section-title reveal">マイナスからプラスへ</h2>
+    <p class="section-desc reveal">薄毛・ムダ毛・スタイルの悩みは、誰もが抱えるリアルなコンプレックス。<br>ALASCEはその「マイナス」を、変わるための第一歩に変える情報を届けます。</p>
+    <div class="concept-flow reveal">
+
+      <!-- コンプレックス -->
+      <div class="concept-node">
+        <div class="concept-icon state-minus">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <circle cx="14" cy="14" r="10" stroke="#c05050" stroke-width="1.5"/>
+            <path d="M10 18c1-2 7-2 8 0" stroke="#c05050" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="10.5" cy="12" r="1.2" fill="#c05050"/>
+            <circle cx="17.5" cy="12" r="1.2" fill="#c05050"/>
+          </svg>
+        </div>
+        <div class="concept-label">コンプレックス</div>
+      </div>
+
+      <div class="concept-arrow">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M4 10h12M12 6l4 4-4 4" stroke="rgba(201,160,48,0.45)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <!-- 正しい情報 -->
+      <div class="concept-node">
+        <div class="concept-icon state-info">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <rect x="6" y="5" width="16" height="18" rx="2" stroke="#c9a030" stroke-width="1.5"/>
+            <path d="M10 10h8M10 14h8M10 18h5" stroke="#c9a030" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="concept-label">正しい情報</div>
+      </div>
+
+      <div class="concept-arrow">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M4 10h12M12 6l4 4-4 4" stroke="rgba(201,160,48,0.45)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <!-- 行動 -->
+      <div class="concept-node">
+        <div class="concept-icon state-act">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <path d="M8 20l4-14 3 8 3-5 2 4" stroke="#4a6fa5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="concept-label">行動</div>
+      </div>
+
+      <div class="concept-arrow">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M4 10h12M12 6l4 4-4 4" stroke="rgba(201,160,48,0.45)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <!-- プラス -->
+      <div class="concept-node">
+        <div class="concept-icon state-plus">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <circle cx="14" cy="14" r="10" stroke="#c9a030" stroke-width="1.5"/>
+            <path d="M10 15c1 2 7 2 8 0" stroke="#c9a030" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="10.5" cy="11.5" r="1.2" fill="#c9a030"/>
+            <circle cx="17.5" cy="11.5" r="1.2" fill="#c9a030"/>
+          </svg>
+        </div>
+        <div class="concept-label">自信・プラスへ</div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- カテゴリ -->
+  <section id="categories">
+    <p class="section-label">Categories</p>
+    <h2 class="section-title">コンテンツカテゴリ</h2>
+    <p class="section-desc">各カテゴリで、信頼性の高い情報と実践的な選択肢を提供します。</p>
+
+    <div class="cards-grid">
+
+      <!-- AGA Lab -->
+      <a href="https://alasce.com/aga-lab/" class="card aga reveal" id="card-aga">
+        <svg class="card-svg-icon" viewBox="0 0 36 36" fill="none">
+          <circle cx="18" cy="18" r="16" stroke="#c9a030" stroke-width="1.5"/>
+          <path d="M18 10v8l5 3" stroke="#c9a030" stroke-width="2" stroke-linecap="round"/>
+          <path d="M10 26c2-3 4-4 8-4s6 1 8 4" stroke="#c9a030" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <span class="card-badge badge-aga">AGA Lab</span>
+        <h3 class="card-title">AGAヘアケア</h3>
+        <p class="card-desc">薄毛・抜け毛のメカニズムから治療の選択肢まで、エビデンスベースで解説。クリニック比較・費用の目安も網羅。</p>
+        <span class="card-link">AGA Labを読む →</span>
+      </a>
+
+      <!-- メンズ脱毛 -->
+      <a href="https://alasce.com/mens-hair-removal/" class="card hair reveal" id="card-hair">
+        <svg class="card-svg-icon" viewBox="0 0 36 36" fill="none">
+          <path d="M18 6v24M10 10l16 0M12 18h12M14 26h8" stroke="#4a6fa5" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+        <span class="card-badge badge-hair">メンズ脱毛</span>
+        <h3 class="card-title">メンズ脱毛</h3>
+        <p class="card-desc">ヒゲ・全身・VIOなど部位別の脱毛方法・サロン・クリニック比較を徹底解説。コスパ重視の選び方も。</p>
+        <span class="card-link">記事を読む →</span>
+      </a>
+
+      <!-- ファッション Coming Soon -->
+      <div class="card fashion soon reveal" id="card-fashion" aria-label="ファッション（準備中）">
+        <svg class="card-svg-icon" viewBox="0 0 36 36" fill="none">
+          <path d="M13 6l-4 6h4v18h10V12h4L23 6c-1 2-3 3-5 3s-4-1-5-3z" stroke="rgba(201,160,48,0.5)" stroke-width="1.5" stroke-linejoin="round"/>
+        </svg>
+        <span class="card-badge badge-soon">Coming Soon</span>
+        <h3 class="card-title">メンズファッション</h3>
+        <p class="card-desc">体型・予算・シーン別のコーディネート提案。自分らしいスタイルへのロードマップを提供予定。</p>
+        <span class="card-link" style="color:var(--muted)">準備中</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ミッション -->
+  <section class="mission reveal">
+    <p class="section-label">Mission</p>
+    <h2 class="mission-quote">
+      「なんとかしたい」と思った瞬間が、<br>
+      <em>変化の始まり。</em>
+    </h2>
+    <p class="mission-body">
+      ALASCEは、情報の非対称性をなくすことで、あなたが自分自身の判断で前に進めるよう、正確で誠実な情報を届けます。<br>
+      商業主義より、あなたの「次の一歩」を優先します。
+    </p>
+  </section>
+
+  <!-- フッター -->
+  <footer>
+    <div class="footer-logo">ALASCE</div>
+    <div class="footer-separator"></div>
+    <ul class="footer-links">
+      <li><a href="https://alasce.com/aga-lab/">AGA Lab</a></li>
+      <li><a href="https://alasce.com/mens-hair-removal/">メンズ脱毛</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#" id="footer-privacy">プライバシーポリシー</a></li>
+    </ul>
+    <p class="footer-copy">&copy; 2026 ALASCE. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // スクロールアニメーション
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+      { threshold: 0.1 }
+    );
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
