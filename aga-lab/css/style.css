@@ -2800,7 +2800,8 @@ section {
 
 @media (max-width: 1050px) {
   .progress-stages-text {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(5, 1fr);
+    overflow-x: auto;
   }
 }
 
