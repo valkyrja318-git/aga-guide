@@ -198,7 +198,7 @@ h4 {
 
 /* ---------- セクション共通 ---------- */
 section {
-  padding: 88px 0;
+  padding: 96px 0;
 }
 
 .section-header {
@@ -208,14 +208,14 @@ section {
 
 .section-header h2 {
   font-family: var(--font-serif);
-  font-size: 2.1rem;
+  font-size: 2.0rem;
   font-weight: 600;
   color: var(--color-primary);
-  margin-bottom: 14px;
-  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+  letter-spacing: 0.01em;
   position: relative;
   display: inline-block;
-  padding-bottom: 14px;
+  padding-bottom: 18px;
 }
 
 .section-header h2::after {
@@ -224,10 +224,10 @@ section {
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 36px;
-  height: 2px;
-  background: linear-gradient(90deg, var(--color-gold), var(--color-gold-lt));
-  border-radius: 2px;
+  width: 28px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+  border-radius: 0;
 }
 
 .section-header p {
@@ -261,7 +261,7 @@ section {
   max-width: var(--max-width);
   margin: 0 auto;
   padding: 0 28px;
-  height: 66px;
+  height: 70px;
   transition: padding var(--transition);
 }
 
@@ -271,28 +271,16 @@ section {
   gap: 10px;
   flex-shrink: 1;
   min-width: 0;
+  text-decoration: none;
 }
 
-.logo-mark {
-  background: linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-lt) 100%);
+.logo-signature {
+  font-family: 'Pinyon Script', cursive;
+  font-size: 2.1rem;
   color: var(--color-primary);
-  font-family: var(--font-serif);
-  font-size: 0.82rem;
-  font-weight: 700;
-  padding: 4px 9px;
-  border-radius: var(--radius-sm);
-  letter-spacing: 0.1em;
-  flex-shrink: 0;
-}
-
-.logo-text {
-  color: var(--color-primary);
-  font-family: var(--font-serif);
-  font-size: 0.98rem;
-  font-weight: 600;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  line-height: 1;
+  padding-bottom: 2px;
+  letter-spacing: 0.02em;
 }
 
 .nav-links {
