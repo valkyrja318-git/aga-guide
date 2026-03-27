@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 120">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400&amp;display=swap');
+      .text { font-family: 'Cormorant Garamond', serif; fill: #0c1c3a; }
+      .main-a { font-size: 140px; transform: scaleX(1.2); transform-origin: left center; }
+      .lasce { font-size: 50px; letter-spacing: 0.22em; text-transform: uppercase; }
+    </style>
+  </defs>
+  <!-- 横並び（羅列）バージョンのロゴ -->
+  <text x="20" y="100" class="text main-a">A</text>
+  <text x="140" y="88" class="text lasce">LASCE</text>
+</svg>
